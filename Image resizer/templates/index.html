@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            margin: 20px auto;
+            width: 300px;
+        }
+        input[type="file"], button, input[type="number"] {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 90%;
+        }
+        .dimension-container {
+            margin: 10px auto;
+            width: 90%;
+            text-align: center;
+        }
+        .download-link {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Resizer</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        
+        <div class="dimension-container">
+            <label for="width">Width (px):</label>
+            <input type="number" name="width" id="width" placeholder="Enter width" required min="1">
+            
+            <label for="height">Height (px):</label>
+            <input type="number" name="height" id="height" placeholder="Enter height" required min="1">
+        </div>
+        
+        <button type="submit">Resize Image</button>
+    </form>
+    
+    {% if resized_image %}
+    <div class="download-link">
+        <p>Image resized successfully!</p>
+        <a href="{{ url_for('download_file', filename=resized_image) }}" download>
+            <button>Download Resized Image</button>
+        </a>
+    </div>
+    {% endif %}
+</body>
+</html>
